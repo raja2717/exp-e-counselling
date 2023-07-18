@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	<error-handler name="globalError_Handler" doc:id="c8c6ca80-75f1-4d28-9c2d-305df1452015" >
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="5f21b103-e5b6-493a-8231-b19d0653b3f6" type="APIKIT:BAD_REQUEST">
+			<ee:transform doc:name="Bad request Response" doc:id="1e955492-0bb7-4014-9398-ed7f49505e1d" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+import dwl_common_modules::commonUtils
+output application/json
+---
+commonUtils::buildResponseStatus("please specify correct format",server.host,vars.apiStartTime,"400",error.detailedDescription)]]></ee:set-payload>
+				</ee:message>
+				<ee:variables >
+					<ee:set-variable variableName="httpStatus" ><![CDATA[400]]></ee:set-variable>
+				</ee:variables>
+			</ee:transform>
+		</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="7b6753c6-c8c1-4cee-b3e3-58b2e235c93f" type="APIKIT:METHOD_NOT_ALLOWED">
+			<ee:transform doc:name="Method not allowed Response" doc:id="0dbec201-3871-4ab6-a051-d9e908e16de4" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+import dwl_common_modules::commonUtils
+output application/json
+---
+commonUtils::buildResponseStatus("Method Not Allowed",server.host,vars.apiStartTime,"405",error.detailedDescription)]]></ee:set-payload>
+				</ee:message>
+				<ee:variables >
+					<ee:set-variable variableName="httpStatus" ><![CDATA[405]]></ee:set-variable>
+				</ee:variables>
+			</ee:transform>
+		</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="91488c93-df8b-4a60-86d1-9f43c140a200" type="APIKIT:NOT_IMPLEMENTED">
+			<ee:transform doc:name="Not Implemented Response" doc:id="73e11711-7a05-4c5a-8348-c69a972c1300" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+import dwl_common_modules::commonUtils
+output application/json
+---
+commonUtils::buildResponseStatus("Not Implemented",server.host,vars.apiStartTime,"501",error.detailedDescription)]]></ee:set-payload>
+				</ee:message>
+				<ee:variables >
+					<ee:set-variable variableName="httpStatus" ><![CDATA[501]]></ee:set-variable>
+				</ee:variables>
+			</ee:transform>
+		</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="0c9f2661-a675-4e8c-a9de-eb87b6b1fee1" type="APIKIT:NOT_ACCEPTABLE">
+			<ee:transform doc:name="Not acceptable Response" doc:id="87548f32-0fda-476a-9cba-fb88b1aef4b6" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+import dwl_common_modules::commonUtils
+output application/json
+---
+commonUtils::buildResponseStatus("Not Acceptable",server.host,vars.apiStartTime,"406",error.detailedDescription)]]></ee:set-payload>
+				</ee:message>
+				<ee:variables >
+					<ee:set-variable variableName="httpStatus" ><![CDATA[406]]></ee:set-variable>
+				</ee:variables>
+			</ee:transform>
+		</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="e90e4f73-d28d-4277-b896-0cd9120c6754" type="APIKIT:NOT_FOUND">
+			<ee:transform doc:name="Resource not found Response" doc:id="23d13a0c-eab8-44f6-be3e-b12192a3f898" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+import dwl_common_modules::commonUtils
+output application/json
+---
+commonUtils::buildResponseStatus("Resource Not Found",server.host,vars.apiStartTime,"404",error.detailedDescription)]]></ee:set-payload>
+				</ee:message>
+				<ee:variables >
+					<ee:set-variable variableName="httpStatus" ><![CDATA[404]]></ee:set-variable>
+				</ee:variables>
+			</ee:transform>
+		</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="1d699d4a-9cf9-49ba-a33d-d135caf75157" type="APIKIT:UNSUPPORTED_MEDIA_TYPE">
+			<ee:transform doc:name="Unsupported media type Response" doc:id="e6245d65-477b-4276-a25b-598bc7caffdb" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+import dwl_common_modules::commonUtils
+output application/json
+---
+commonUtils::buildResponseStatus("Unsupported Media Type",server.host,vars.apiStartTime,"415",error.detailedDescription)]]></ee:set-payload>
+				</ee:message>
+				<ee:variables >
+					<ee:set-variable variableName="httpStatus" ><![CDATA[415]]></ee:set-variable>
+				</ee:variables>
+			</ee:transform>
+		</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="c791eaf0-885b-49b7-a196-e02a33972f49" type="ANY">
+			<ee:transform doc:name="Error Response" doc:id="0d42b5fa-35a9-4b76-9604-376ced0ecd01" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+import dwl_common_modules::commonUtils
+output application/json
+---
+if(error.muleMessage.payload != null)
+	error.muleMessage.payload
+else 
+	commonUtils::buildResponseStatus("ERROR",server.host,vars.apiStartTime,"500",error.detailedDescription)]]></ee:set-payload>
+				</ee:message>
+				<ee:variables >
+					<ee:set-variable variableName="httpStatus" ><![CDATA[error.muleMessage.payload.Status.code]]></ee:set-variable>
+				</ee:variables>
+			</ee:transform>
+		</on-error-propagate>
+	
+</error-handler>
+</mule>

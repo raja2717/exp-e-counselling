@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<sub-flow name="healthCheckSub_Flow" doc:id="e3275b78-ec64-433c-9c8d-d61bf21814f5" >
+		<ee:transform doc:name="healthCheck Response" doc:id="8aff44d4-2a54-4cde-8989-03a101e14492" >
+			<ee:message >
+				<ee:set-payload resource="dwls/healthCheck-Response.dwl" />
+			</ee:message>
+		</ee:transform>
+	</sub-flow>
+</mule>

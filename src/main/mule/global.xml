@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties" xmlns:tls="http://www.mulesoft.org/schema/mule/tls" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd">
+    <http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="a4396f59-febf-4ca9-aa55-d1e0f4fe6cbe">
+        <http:listener-connection host="0.0.0.0" port="${HTTPListener.port}" protocol="HTTPS">
+            <tls:context>
+                <tls:key-store type="jks" path="keystore.jks" keyPassword="${secure::HTTPListener.TLS.key_store_configuration.key_store.key_password}" password="${secure::HTTPListener.TLS.key_store_configuration.key_store.password}" />
+            </tls:context>
+        </http:listener-connection>
+    </http:listener-config>
+    <apikit:config name="api-config" api="resource::3b747eb1-7ede-422f-a9a4-e15e7d280668:exp-e-counselling:1.0.3:raml:zip:api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+    <configuration-properties doc:name="Configuration properties" doc:id="736f2ff3-c389-4bba-9584-979f803c3615" file="property\exp-e-counselling-${env}.yaml" />
+    <secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="0598b9c4-9ee7-4cfe-a7f8-bd92a52ff1f0" file="property\exp-e-counselling-${env}.yaml" key="${key.property}" />
+    <http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="39bf66a5-c396-4cdf-8231-a07210b0e770">
+        <http:request-connection host="${HTTPRequest.host}" protocol="HTTPS"/>
+    </http:request-config>
+    <configuration doc:name="globalError_Handler" doc:id="ab9ad08a-bb89-4e15-a19f-27446b201be5" defaultErrorHandler-ref="globalError_Handler" />
+</mule>

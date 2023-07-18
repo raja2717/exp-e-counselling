@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<sub-flow name="proc-e-counselling-Invoke_Sub-flow" doc:id="728e2b66-ceac-4a1a-9216-53e5b645a85e" >
+		<logger level="INFO" doc:name="Logging before invoking proc-e-counselling" doc:id="c1a8cae2-6598-48fc-bb4c-1cf4fad353e7" message="#[payload]"/>
+		<http:request method="POST" doc:name="allocateSeat-proc-e-counselling-Invoke" doc:id="57ec71f6-ec0c-44ab-aafd-ac825de3dc24" config-ref="HTTP_Request_configuration" path="/allocateSeat">
+			<error-mapping targetType="APP:CONNECTIVITY_PROC-E-COUNSELLING" />
+			<reconnect frequency="3000" />
+			<http:headers ><![CDATA[#[output application/java
+---
+{
+	"client_secret" : "${secure::HTTPRequest.proc-e-counselling.client_secret}",
+	"client_id" : "${secure::HTTPRequest.proc-e-counselling.client_id}"
+}]]]></http:headers>
+		</http:request>
+		<logger level="INFO" doc:name="Logging after invoking proc-e-counselling" doc:id="f9e73dd1-922f-4092-be91-f17f40233891" message="#[payload]"/>
+	</sub-flow>
+</mule>

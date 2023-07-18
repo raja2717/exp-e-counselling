@@ -1,0 +1,14 @@
+HTTPListener:
+  port: "8082"
+  TLS:
+    key_store_configuration:
+      key_store:
+        key_password: "![hRY28R7GMmu61gSpeZ4v9A==]"
+        password: "![hRY28R7GMmu61gSpeZ4v9A==]"
+HTTPRequest:
+  host: "proc-e-counselling-dev.us-e2.cloudhub.io"
+  proc-e-counselling:
+    client_id: "![nxjQZBJWJ2sVT1eq+pkYwVaKUMk2Wa9Y95IMmuyfR6JKUpPYgjlwzrgMc/H1BdIS]"
+    client_secret: "![kk6aqVQygzLFJ0yCL8U167mg0gXI8iC+83sxdPGWU8aJJ30a4XPDofKVJopaux94]"
+api:
+ version: "1.0.0"
