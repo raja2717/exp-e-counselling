@@ -19,4 +19,18 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 		</http:request>
 		<logger level="INFO" doc:name="Logging after invoking proc-e-counselling" doc:id="f9e73dd1-922f-4092-be91-f17f40233891" message="#[payload]"/>
 	</sub-flow>
+	<sub-flow name="proc-e-counselling-getCollegeList-Invoke_Sub-flow" doc:id="f7dbe63f-30d3-4fae-bbf9-aece2245401f" >
+		<logger level="INFO" doc:name="Logging before invoking proc-e-counselling" doc:id="d7c29982-6c58-48cf-abf0-9f16f889c6c3" message="#[payload]" />
+		<http:request method="GET" doc:name="allocateSeat-proc-e-counselling-Invoke" doc:id="4728dbb0-66ca-480d-8b9d-6808198b1dae" config-ref="HTTP_Request_configuration" path="/getCollegeList" >
+			<error-mapping targetType="APP:CONNECTIVITY_PROC-E-COUNSELLING" />
+			<reconnect frequency="3000" />
+			<http:headers ><![CDATA[#[output application/java
+---
+{
+	"client_secret" : "${secure::HTTPRequest.proc-e-counselling.client_secret}",
+	"client_id" : "${secure::HTTPRequest.proc-e-counselling.client_id}"
+}]]]></http:headers>
+		</http:request>
+		<logger level="INFO" doc:name="Logging after invoking proc-e-counselling" doc:id="4c02b6ec-f000-4b07-8b8f-a5817d07da4e" message="#[payload]" />
+	</sub-flow>
 </mule>

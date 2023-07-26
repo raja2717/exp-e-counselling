@@ -10,23 +10,24 @@
                 <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
             </http:error-response>
         </http:listener>
-        <ee:transform doc:name="apiStartTime-variable" doc:id="c499c4f2-87ab-4279-b00f-c7c12b6dbd4a" >
-			<ee:message >
-			</ee:message>
-			<ee:variables >
-				<ee:set-variable variableName="apiStartTime" ><![CDATA[%dw 2.0
+        <ee:transform doc:name="apiStartTime-variable" doc:id="c499c4f2-87ab-4279-b00f-c7c12b6dbd4a">
+            <ee:message />
+            <ee:variables>
+                <ee:set-variable variableName="apiStartTime"><![CDATA[%dw 2.0
 output application/dw
 ---
 now()]]></ee:set-variable>
-			</ee:variables>
-		</ee:transform>
-		<apikit:router config-ref="api-config" />
-        
+            </ee:variables>
+        </ee:transform>
+        <apikit:router config-ref="exp-e-counselling-config" />
     </flow>
-    <flow name="post:\allocateSeat:application\json:api-config">
-        <flow-ref doc:name="proc-e-counselling-Invoke_Sub-flow-Invoke" doc:id="e534b9de-dc53-438e-959f-c112e75fa6be" name="proc-e-counselling-Invoke_Sub-flow" />
+    <flow name="get:\ping:exp-e-counselling-config">
+		<flow-ref doc:name="healthCheckSub_Flow-Invoke" doc:id="689eadcb-befd-4f61-be47-73b93f6f5025" name="healthCheckSub_Flow"/>
     </flow>
-    <flow name="get:\ping:api-config">
-		<flow-ref doc:name="healthCheckSub_Flow-Invoke" doc:id="26d90d03-695a-4cff-8511-85b301bb4f09" name="healthCheckSub_Flow"/>
+    <flow name="post:\allocateSeat:application\json:exp-e-counselling-config">
+        <flow-ref doc:name="proc-e-counselling-Invoke_Sub-flow-Invoke" doc:id="ca31997e-4a4a-4149-9d2e-7c04880cb617" name="proc-e-counselling-Invoke_Sub-flow"/>
+    </flow>
+    <flow name="get:\getCollegeList:exp-e-counselling-config">
+		<flow-ref doc:name="proc-e-counselling-getCollegeList-Invoke_Sub-flow-Invoke" doc:id="766d4c9b-b38a-48ee-b729-9c046de06e8a" name="proc-e-counselling-getCollegeList-Invoke_Sub-flow"/>
     </flow>
 </mule>

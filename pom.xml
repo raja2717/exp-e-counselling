@@ -61,7 +61,7 @@
 		<dependency>
 			<groupId>3b747eb1-7ede-422f-a9a4-e15e7d280668</groupId>
 			<artifactId>exp-e-counselling</artifactId>
-			<version>1.0.3</version>
+			<version>1.0.4</version>
 			<classifier>raml</classifier>
 			<type>zip</type>
 		</dependency>
